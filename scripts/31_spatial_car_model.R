@@ -325,6 +325,9 @@ for (grp in primary_groups) {
     family = quasipoisson(link = "log")
   )
 
+  # Subset to rows actually used in model (cross-basis drops lagged rows)
+  used_idx <- as.integer(names(residuals(model)))
+  df <- df[used_idx, ]
   df$dev_resid <- as.numeric(residuals(model, type = "deviance"))
 
   # Mean residuals by SA4

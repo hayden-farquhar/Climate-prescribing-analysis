@@ -1,6 +1,6 @@
-# Data - raw data must be downloaded separately (see README)
-data/raw/
-data/processed/
+# Data - all data must be downloaded/generated separately (see README)
+data/
+outputs/
 
 # Environment
 .env
@@ -21,9 +21,3 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
-
-# Rendered PDFs (regenerate with render_manuscript.sh)
-manuscript/*.pdf
-
-# Compressed archives already extracted
-data/spatial/*.zip

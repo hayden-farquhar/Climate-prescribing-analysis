@@ -7,8 +7,8 @@
 #
 #   1. Cluster-robust standard errors (clustered at SA4 level) — accounts for
 #      arbitrary within-SA4 correlation using sandwich::vcovCL
-#   2. Driscoll-Kraay spatial HAC standard errors — accounts for both spatial
-#      and temporal correlation in panel data
+#   2. HC3 heteroscedasticity-consistent standard errors — robust to
+#      heteroscedasticity without assuming a specific correlation structure
 #   3. Two-stage spatial filtering: fit DLNM, extract SA4-level cumulative
 #      effects, then fit a spatial lag model to test whether spatial dependence
 #      biases the cross-basis coefficients
@@ -184,29 +184,30 @@ for (grp in primary_groups) {
       "(", round(pred_cluster$allRRlow[1], 4), "-",
       round(pred_cluster$allRRhigh[1], 4), ")\n")
 
-  # --- C. Newey-West HAC SEs (for comparison, temporal only) ---
-  cat("  Computing Newey-West HAC SEs...\n")
-  vcov_nw <- vcovHAC(model, order.by = df$time_index, prewhite = FALSE)
-  pred_nw <- crosspred(cb, model,
-                        vcov = vcov_nw,
-                        at = c(temp_p95, temp_p99),
-                        cen = temp_ref)
+  # --- C. HC3 heteroscedasticity-robust SEs ---
+  cat("  Computing HC3 robust SEs...\n")
+  vcov_hc3 <- vcovHC(model, type = "HC3")
+  pred_hc3 <- crosspred(cb, model,
+                         vcov = vcov_hc3,
+                         at = c(temp_p95, temp_p99),
+                         cen = temp_ref)
 
-  cat("  Newey-West: RR@p95 =", round(pred_nw$allRRfit[1], 4),
-      "(", round(pred_nw$allRRlow[1], 4), "-",
-      round(pred_nw$allRRhigh[1], 4), ")\n")
+  cat("  HC3 robust: RR@p95 =", round(pred_hc3$allRRfit[1], 4),
+      "(", round(pred_hc3$allRRlow[1], 4), "-",
+      round(pred_hc3$allRRhigh[1], 4), ")\n")
 
   # --- D. Two-way cluster-robust SEs (SA4 + time) ---
   cat("  Computing two-way cluster-robust SEs (SA4 × week)...\n")
-  # Create week index for temporal clustering
-  df$week_idx <- as.integer(factor(df$week_start))
+  # Create week index for temporal clustering (bin into 4-week blocks to
+  # reduce the number of clusters and ensure feasibility)
+  df$time_block <- as.integer(floor(df$time_index / 4))
 
   vcov_twoway <- tryCatch({
-    vcovCL(model, cluster = ~ sa4_code + week_idx,
+    vcovCL(model, cluster = df[, c("sa4_code", "time_block")],
            multi0 = TRUE, type = "HC1")
   }, error = function(e) {
-    # Fallback: SA4 cluster only
-    cat("    Two-way clustering failed, using SA4-only.\n")
+    cat("    Two-way clustering failed:", conditionMessage(e), "\n")
+    cat("    Falling back to SA4-only clustering.\n")
     vcov_cluster
   })
 
@@ -224,22 +225,22 @@ for (grp in primary_groups) {
   cb_idx <- grep("^cb", names(coef(model)))
   se_model   <- sqrt(diag(vcov_model)[cb_idx])
   se_cluster <- sqrt(diag(vcov_cluster)[cb_idx])
-  se_nw      <- sqrt(diag(vcov_nw)[cb_idx])
+  se_hc3     <- sqrt(diag(vcov_hc3)[cb_idx])
   se_twoway  <- sqrt(diag(vcov_twoway)[cb_idx])
 
   ratio_cluster <- mean(se_cluster / se_model)
-  ratio_nw      <- mean(se_nw / se_model)
+  ratio_hc3     <- mean(se_hc3 / se_model)
   ratio_twoway  <- mean(se_twoway / se_model)
 
   cat("\n  SE inflation ratios (vs model-based):\n")
   cat("    Cluster-robust (SA4):", round(ratio_cluster, 2), "\n")
-  cat("    Newey-West (HAC):", round(ratio_nw, 2), "\n")
+  cat("    HC3 robust:", round(ratio_hc3, 2), "\n")
   cat("    Two-way (SA4 × week):", round(ratio_twoway, 2), "\n")
 
   # CI width comparison
   ci_width_model   <- pred_model$allRRhigh[1] - pred_model$allRRlow[1]
   ci_width_cluster <- pred_cluster$allRRhigh[1] - pred_cluster$allRRlow[1]
-  ci_width_nw      <- pred_nw$allRRhigh[1] - pred_nw$allRRlow[1]
+  ci_width_hc3     <- pred_hc3$allRRhigh[1] - pred_hc3$allRRlow[1]
   ci_width_twoway  <- pred_twoway$allRRhigh[1] - pred_twoway$allRRlow[1]
 
   # Store
@@ -256,11 +257,11 @@ for (grp in primary_groups) {
     rr_p95_cluster_lo = round(pred_cluster$allRRlow[1], 4),
     rr_p95_cluster_hi = round(pred_cluster$allRRhigh[1], 4),
     ci_width_cluster  = round(ci_width_cluster, 4),
-    # Newey-West
-    rr_p95_nw    = round(pred_nw$allRRfit[1], 4),
-    rr_p95_nw_lo = round(pred_nw$allRRlow[1], 4),
-    rr_p95_nw_hi = round(pred_nw$allRRhigh[1], 4),
-    ci_width_nw  = round(ci_width_nw, 4),
+    # HC3 robust
+    rr_p95_hc3    = round(pred_hc3$allRRfit[1], 4),
+    rr_p95_hc3_lo = round(pred_hc3$allRRlow[1], 4),
+    rr_p95_hc3_hi = round(pred_hc3$allRRhigh[1], 4),
+    ci_width_hc3  = round(ci_width_hc3, 4),
     # Two-way cluster
     rr_p95_twoway    = round(pred_twoway$allRRfit[1], 4),
     rr_p95_twoway_lo = round(pred_twoway$allRRlow[1], 4),
@@ -268,7 +269,7 @@ for (grp in primary_groups) {
     ci_width_twoway  = round(ci_width_twoway, 4),
     # SE ratios
     se_ratio_cluster = round(ratio_cluster, 3),
-    se_ratio_nw      = round(ratio_nw, 3),
+    se_ratio_hc3     = round(ratio_hc3, 3),
     se_ratio_twoway  = round(ratio_twoway, 3),
     n_obs = nrow(df),
     n_sa4 = n_distinct(df$sa4_code),
@@ -414,9 +415,9 @@ for (i in seq_len(nrow(comp_table))) {
     rr = r$rr_p95_cluster, rr_lo = r$rr_p95_cluster_lo, rr_hi = r$rr_p95_cluster_hi,
     ci_width = r$ci_width_cluster)
   forest_rows[[length(forest_rows) + 1]] <- data.frame(
-    label = r$label, se_type = "Newey-West (temporal HAC)",
-    rr = r$rr_p95_nw, rr_lo = r$rr_p95_nw_lo, rr_hi = r$rr_p95_nw_hi,
-    ci_width = r$ci_width_nw)
+    label = r$label, se_type = "HC3 robust",
+    rr = r$rr_p95_hc3, rr_lo = r$rr_p95_hc3_lo, rr_hi = r$rr_p95_hc3_hi,
+    ci_width = r$ci_width_hc3)
   forest_rows[[length(forest_rows) + 1]] <- data.frame(
     label = r$label, se_type = "Two-way cluster (SA4 x week)",
     rr = r$rr_p95_twoway, rr_lo = r$rr_p95_twoway_lo, rr_hi = r$rr_p95_twoway_hi,
@@ -427,7 +428,7 @@ forest_df <- bind_rows(forest_rows) |>
   mutate(
     se_type = factor(se_type, levels = c(
       "Model-based", "Cluster-robust (SA4)",
-      "Newey-West (temporal HAC)", "Two-way cluster (SA4 x week)"
+      "HC3 robust", "Two-way cluster (SA4 x week)"
     )),
     y_label = paste0(label, "\n", se_type)
   )
@@ -439,7 +440,7 @@ p_forest <- ggplot(forest_df, aes(x = rr, y = y_label, colour = se_type)) +
   scale_colour_manual(
     values = c("Model-based" = "#4575b4",
                "Cluster-robust (SA4)" = "#fc8d59",
-               "Newey-West (temporal HAC)" = "#d73027",
+               "HC3 robust" = "#d73027",
                "Two-way cluster (SA4 x week)" = "#7a0177"),
     name = "SE Estimator"
   ) +
@@ -462,7 +463,7 @@ cat("  -> Saved: spatial_se_forest.png\n")
 
 # --- SE inflation bar chart ---
 se_ratios <- comp_table |>
-  select(label, se_ratio_cluster, se_ratio_nw, se_ratio_twoway) |>
+  select(label, se_ratio_cluster, se_ratio_hc3, se_ratio_twoway) |>
   tidyr::pivot_longer(
     cols = starts_with("se_ratio"),
     names_to = "estimator",
@@ -470,8 +471,8 @@ se_ratios <- comp_table |>
   ) |>
   mutate(
     estimator = case_when(
-      grepl("cluster", estimator) ~ "Cluster-robust\n(SA4)",
-      grepl("nw", estimator) ~ "Newey-West\n(temporal HAC)",
+      grepl("cluster$", estimator) ~ "Cluster-robust\n(SA4)",
+      grepl("hc3", estimator) ~ "HC3\nrobust",
       grepl("twoway", estimator) ~ "Two-way\n(SA4 x week)"
     )
   )
@@ -519,9 +520,9 @@ for (grp in primary_groups) {
   cat(sprintf("    Cluster (SA4):  %.3f (%.3f-%.3f)  CI width = %.4f  (SE x%.2f)\n",
               r$rr_p95_cluster, r$rr_p95_cluster_lo, r$rr_p95_cluster_hi,
               r$ci_width_cluster, r$se_ratio_cluster))
-  cat(sprintf("    Newey-West:     %.3f (%.3f-%.3f)  CI width = %.4f  (SE x%.2f)\n",
-              r$rr_p95_nw, r$rr_p95_nw_lo, r$rr_p95_nw_hi,
-              r$ci_width_nw, r$se_ratio_nw))
+  cat(sprintf("    HC3 robust:     %.3f (%.3f-%.3f)  CI width = %.4f  (SE x%.2f)\n",
+              r$rr_p95_hc3, r$rr_p95_hc3_lo, r$rr_p95_hc3_hi,
+              r$ci_width_hc3, r$se_ratio_hc3))
   cat(sprintf("    Two-way:        %.3f (%.3f-%.3f)  CI width = %.4f  (SE x%.2f)\n",
               r$rr_p95_twoway, r$rr_p95_twoway_lo, r$rr_p95_twoway_hi,
               r$ci_width_twoway, r$se_ratio_twoway))

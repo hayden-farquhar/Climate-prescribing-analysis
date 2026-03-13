@@ -1,4 +1,0 @@
-"group","label","moran_I_overall","moran_p_overall","moran_I_weekly_mean","moran_I_weekly_median","pct_weeks_significant","n_weeks_tested"
-"cvd_total","Cardiovascular",0.2751,0.000644176080920029,0.3039,0.2838,88,50
-"mh_total","Mental Health",0.2882,0.00032702092102574,0.2925,0.2849,88,50
-"resp_total","Respiratory",0.3541,1.24183017706869e-05,0.3392,0.3712,90,50

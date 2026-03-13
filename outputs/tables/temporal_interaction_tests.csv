@@ -1,4 +1,0 @@
-"group","label","f_stat","df_diff","p_value","significant"
-"cvd_total","Cardiovascular",27.705,2,9.49888410704339e-13,TRUE
-"mh_total","Mental Health",5.341,2,0.00479658216955883,TRUE
-"resp_total","Respiratory",9.181,2,0.000103263243340618,TRUE

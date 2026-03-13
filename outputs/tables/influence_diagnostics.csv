@@ -1,4 +1,0 @@
-"group","label","n_obs","n_params","cooks_threshold","n_high_cooks","pct_high_cooks","max_cooks","mean_cooks","hat_threshold","n_high_hat","pct_high_hat"
-"cvd_total","Cardiovascular",34580,115,0.000116,1852,5.36,0.011775,3.1e-05,0.0067,355,1.03
-"mh_total","Mental Health",34580,115,0.000116,2133,6.17,0.00435,3.1e-05,0.0067,362,1.05
-"resp_total","Respiratory",34580,115,0.000116,1400,4.05,0.015879,3.2e-05,0.0067,323,0.93

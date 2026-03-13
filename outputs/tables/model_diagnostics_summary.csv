@@ -1,0 +1,4 @@
+"group","label","n_obs","dispersion","deviance_df_ratio","overdispersion_p","mean_resid","sd_resid","skewness","mean_acf_lag1","median_acf_lag1","max_acf_lag1"
+"cvd_total","Cardiovascular",34568,81.09,80.0274,0,-0.0824,8.9307,0.8163,0.3445,0.3492,0.62
+"mh_total","Mental Health",34568,25.09,25.0061,0,-0.0436,4.9922,0.2529,0.2895,0.277,0.7104
+"resp_total","Respiratory",34568,37.05,33.6902,0,-0.0948,5.794,3.1601,0.5491,0.5473,0.7291

@@ -1,0 +1,4 @@
+"group","label","suffix","total_rx","temp_ref","an_heat","af_heat_pct","an_extreme","af_extreme_pct","an_cold","af_cold_pct","n_obs","n_sa4"
+"resp_total","Respiratory (total)","",96530302,22.8,-1669137,-1.73,-479809,-0.5,692927,0.72,34580,70
+"resp_relievers","Resp. Relievers","",28302719,22.8,-765322,-2.7,-210844,-0.74,318737,1.13,34580,70
+"resp_preventers","Resp. Preventers","",44995157,22.8,-855022,-1.9,-248841,-0.55,324816,0.72,34580,70

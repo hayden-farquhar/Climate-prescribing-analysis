@@ -1,0 +1,29 @@
+# Data - raw data must be downloaded separately (see README)
+data/raw/
+data/processed/
+
+# Environment
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# R
+.RData
+.Rhistory
+.Rproj.user/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Rendered PDFs (regenerate with render_manuscript.sh)
+manuscript/*.pdf
+
+# Compressed archives already extracted
+data/spatial/*.zip

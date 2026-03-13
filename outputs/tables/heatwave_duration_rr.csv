@@ -1,0 +1,21 @@
+"group","label","category","rr","rr_lo","rr_hi","p_value","n_obs"
+"cvd_total","Cardiovascular","None (0 days)",1,1,1,NA,34580
+"cvd_total","Cardiovascular","Mild (1-2 days)",1.0085,1.0063,1.0107,3.96057846579174e-14,34580
+"cvd_total","Cardiovascular","Moderate (3-4 days)",0.9997,0.9965,1.003,0.874069144239288,34580
+"cvd_total","Cardiovascular","Severe (5-7 days)",0.9851,0.9805,0.9898,3.6784947725198e-10,34580
+"mh_total","Mental Health","None (0 days)",1,1,1,NA,34580
+"mh_total","Mental Health","Mild (1-2 days)",1.0117,1.0096,1.0137,2.48199078295192e-29,34580
+"mh_total","Mental Health","Moderate (3-4 days)",1.0013,0.9983,1.0043,0.404291772711051,34580
+"mh_total","Mental Health","Severe (5-7 days)",0.9927,0.9885,0.997,0.000816804875245498,34580
+"resp_total","Respiratory","None (0 days)",1,1,1,NA,34580
+"resp_total","Respiratory","Mild (1-2 days)",1.0056,1.0013,1.0099,0.010688479556096,34580
+"resp_total","Respiratory","Moderate (3-4 days)",0.9843,0.978,0.9906,1.29172040893311e-06,34580
+"resp_total","Respiratory","Severe (5-7 days)",0.9452,0.9365,0.9539,7.84615894769605e-33,34580
+"resp_relievers","Resp. Relievers","None (0 days)",1,1,1,NA,34580
+"resp_relievers","Resp. Relievers","Mild (1-2 days)",1.0046,0.999,1.0103,0.107500745913859,34580
+"resp_relievers","Resp. Relievers","Moderate (3-4 days)",0.9799,0.9716,0.9882,2.30077298881597e-06,34580
+"resp_relievers","Resp. Relievers","Severe (5-7 days)",0.9334,0.9221,0.945,3.87758729760534e-28,34580
+"resp_preventers","Resp. Preventers","None (0 days)",1,1,1,NA,34580
+"resp_preventers","Resp. Preventers","Mild (1-2 days)",1.0065,1.0019,1.011,0.00547353866241342,34580
+"resp_preventers","Resp. Preventers","Moderate (3-4 days)",0.9815,0.9748,0.9882,7.7207974085808e-08,34580
+"resp_preventers","Resp. Preventers","Severe (5-7 days)",0.9386,0.9293,0.9479,4.02416807420217e-36,34580

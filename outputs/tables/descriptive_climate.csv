@@ -1,0 +1,9 @@
+"variable","n","mean","sd","p05","median","p95"
+"Weekly mean Tmax (°C)",34580,22.78,6.46,12.31,22.78,33.67
+"Weekly max Tmax (°C)",34580,26.31,7,14.44,26.57,37.42
+"Weekly mean Tmin (°C)",34580,12.67,5.64,4.24,12.24,22.16
+"Weekly total precip (mm)",34580,14.6,23.13,0.08,6.95,53.31
+"Days above 90th pctl",34580,0.72,1.41,0,0,4
+"Days above 95th pctl",34580,0.37,0.96,0,0,2
+"Days above 99th pctl",34580,0.08,0.39,0,0,1
+"Heatwave days/week",34580,0.17,0.79,0,0,1

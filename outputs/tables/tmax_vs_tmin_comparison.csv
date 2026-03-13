@@ -1,0 +1,11 @@
+"group","label","exposure","rr_p95","rr_p95_lo","rr_p95_hi"
+"cvd_total","Cardiovascular","Tmax",1.0041,0.9971,1.0111
+"cvd_total","Cardiovascular","Tmin",0.9927,0.9855,0.9999
+"mh_total","Mental Health","Tmax",1.0033,0.9969,1.0098
+"mh_total","Mental Health","Tmin",1.0097,1.003,1.0164
+"resp_preventers","Resp. Preventers","Tmax",0.8975,0.8848,0.9105
+"resp_preventers","Resp. Preventers","Tmin",0.913,0.8996,0.9267
+"resp_relievers","Resp. Relievers","Tmax",0.8682,0.853,0.8837
+"resp_relievers","Resp. Relievers","Tmin",0.9124,0.8961,0.9291
+"resp_total","Respiratory","Tmax",0.9104,0.8982,0.9227
+"resp_total","Respiratory","Tmin",0.9331,0.9202,0.9462

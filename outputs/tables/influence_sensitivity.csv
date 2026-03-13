@@ -1,0 +1,4 @@
+"group","label","rr_full","rr_full_lo","rr_full_hi","rr_trim","rr_trim_lo","rr_trim_hi","n_removed","pct_removed"
+"cvd_total","Cardiovascular",1.0041,0.9971,1.0111,0.9908,0.9839,0.9979,1852,5.36
+"mh_total","Mental Health",1.0033,0.9969,1.0098,0.9976,0.9912,1.0041,2133,6.17
+"resp_total","Respiratory",0.9104,0.8982,0.9227,0.9223,0.91,0.9349,1400,4.05

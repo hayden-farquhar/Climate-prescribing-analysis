@@ -1,0 +1,20 @@
+"source","test","estimate","ci_lo","ci_hi","p_value","p_bh","p_bonf","sig_nominal","sig_bh","sig_bonf"
+"Primary DLNM (script 05)","Cardiovascular — RR at p95",1.0041,0.9971,1.0111,0.25,0.3167,1,FALSE,FALSE,FALSE
+"Primary DLNM (script 05)","Mental Health — RR at p95",1.0033,0.9969,1.0098,0.3151,0.3742,1,FALSE,FALSE,FALSE
+"Primary DLNM (script 05)","Respiratory — RR at p95",0.9104,0.8982,0.9227,1.46e-42,9.248e-42,2.774e-41,TRUE,TRUE,TRUE
+"Primary DLNM (script 05)","Antidepressants — RR at p95",0.9993,0.9932,1.0054,0.8221,0.8221,1,FALSE,FALSE,FALSE
+"Primary DLNM (script 05)","Anxiolytics — RR at p95",1.0072,0.9967,1.0178,0.1794,0.2435,1,FALSE,FALSE,FALSE
+"Primary DLNM (script 05)","Resp. Relievers — RR at p95",0.8682,0.853,0.8837,2.464e-55,4.682e-54,4.682e-54,TRUE,TRUE,TRUE
+"Primary DLNM (script 05)","Resp. Preventers — RR at p95",0.8975,0.8848,0.9105,1.348e-49,1.281e-48,2.562e-48,TRUE,TRUE,TRUE
+"Equity interaction (script 06)","Cardiovascular — interaction F-test",0.649,NA,NA,0.6619,0.6987,1,FALSE,FALSE,FALSE
+"Equity interaction (script 06)","Mental Health — interaction F-test",0.903,NA,NA,0.4778,0.534,1,FALSE,FALSE,FALSE
+"Equity interaction (script 06)","Respiratory — interaction F-test",11.312,NA,NA,6.359e-11,2.014e-10,1.208e-09,TRUE,TRUE,TRUE
+"Remoteness interaction (script 09)","Cardiovascular — interaction F-test",6.444,NA,NA,0.0002338,0.0004039,0.004443,TRUE,TRUE,TRUE
+"Remoteness interaction (script 09)","Mental Health — interaction F-test",2.69,NA,NA,0.0446,0.06519,0.8475,TRUE,FALSE,FALSE
+"Remoteness interaction (script 09)","Respiratory — interaction F-test",22.552,NA,NA,1.4e-14,6.648e-14,2.659e-13,TRUE,TRUE,TRUE
+"Temporal interaction (script 13)","Cardiovascular — interaction F-test",27.705,NA,NA,9.499e-13,3.61e-12,1.805e-11,TRUE,TRUE,TRUE
+"Temporal interaction (script 13)","Mental Health — interaction F-test",5.341,NA,NA,0.004797,0.007595,0.09114,TRUE,TRUE,FALSE
+"Temporal interaction (script 13)","Respiratory — interaction F-test",9.181,NA,NA,0.0001033,0.0001962,0.001962,TRUE,TRUE,TRUE
+"Compound interaction (script 14)","Cardiovascular — interaction F-test",14.311,NA,NA,6.13e-07,1.456e-06,1.165e-05,TRUE,TRUE,TRUE
+"Compound interaction (script 14)","Mental Health — interaction F-test",13.574,NA,NA,1.281e-06,2.703e-06,2.433e-05,TRUE,TRUE,TRUE
+"Compound interaction (script 14)","Respiratory — interaction F-test",14.936,NA,NA,3.282e-07,8.908e-07,6.236e-06,TRUE,TRUE,TRUE

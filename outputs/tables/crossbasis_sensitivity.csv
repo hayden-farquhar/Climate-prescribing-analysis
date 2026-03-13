@@ -1,0 +1,28 @@
+"group","label","specification","rr_p95","rr_p95_lo","rr_p95_hi","rr_p99","rr_p99_lo","rr_p99_hi","n_params","dispersion","qaic"
+"cvd_total","Cardiovascular","Primary (ns, knots p10/p50/p90, 3 lag knots)",1.0041,0.9971,1.0111,1.0126,1,1.0253,115,81.09,2775833
+"cvd_total","Cardiovascular","Knots p25/p50/p75",1.0049,0.9979,1.0119,1.0084,0.9968,1.0202,115,81.07,2775480
+"cvd_total","Cardiovascular","Knots p33/p66",1.004,0.9973,1.0108,1.0073,0.9963,1.0185,110,81.19,2778899
+"cvd_total","Cardiovascular","Knots p05/p25/p75/p95",0.9997,0.9925,1.007,1.0247,1.0099,1.0397,120,81.07,2775679
+"cvd_total","Cardiovascular","ns df=3 (no internal knots)",1.004,0.9972,1.0108,1.0073,0.9963,1.0185,110,81.19,2778994
+"cvd_total","Cardiovascular","ns df=5",1.0045,0.9975,1.0115,1.0185,1.0053,1.0319,120,81.03,2774450
+"cvd_total","Cardiovascular","2 lag knots",1.0038,0.9968,1.0108,1.0121,0.9996,1.0249,111,81.12,2776949
+"cvd_total","Cardiovascular","4 lag knots",1.0044,0.9974,1.0114,1.0127,1.0002,1.0255,119,81.06,2775306
+"cvd_total","Cardiovascular","Linear temperature",1.0042,0.9989,1.0095,1.0056,0.9985,1.0129,100,81.46,2787572
+"mh_total","Mental Health","Primary (ns, knots p10/p50/p90, 3 lag knots)",1.0033,0.9969,1.0098,1.0097,0.9981,1.0214,115,25.09,867306
+"mh_total","Mental Health","Knots p25/p50/p75",1.0035,0.9971,1.01,1.0068,0.9961,1.0176,115,25.09,867338
+"mh_total","Mental Health","Knots p33/p66",1.0033,0.997,1.0095,1.0052,0.995,1.0155,110,25.12,868082
+"mh_total","Mental Health","Knots p05/p25/p75/p95",0.9997,0.993,1.0064,1.0203,1.0067,1.034,120,25.08,867150
+"mh_total","Mental Health","ns df=3 (no internal knots)",1.0032,0.997,1.0095,1.0052,0.995,1.0155,110,25.12,868101
+"mh_total","Mental Health","ns df=5",1.0034,0.997,1.0099,1.013,1.0009,1.0253,120,25.08,866957
+"mh_total","Mental Health","2 lag knots",1.0028,0.9964,1.0093,1.009,0.9975,1.0208,111,25.12,868209
+"mh_total","Mental Health","4 lag knots",1.0034,0.997,1.0099,1.0097,0.9981,1.0214,119,25.09,867420
+"mh_total","Mental Health","Linear temperature",0.9995,0.9947,1.0044,0.9994,0.9929,1.0059,100,25.19,870698
+"resp_total","Respiratory","Primary (ns, knots p10/p50/p90, 3 lag knots)",0.9104,0.8982,0.9227,0.8928,0.8716,0.9145,115,37.05,1169249
+"resp_total","Respiratory","Knots p25/p50/p75",0.9128,0.9005,0.9252,0.8844,0.8649,0.9044,115,37.07,1169843
+"resp_total","Respiratory","Knots p33/p66",0.9109,0.8991,0.9228,0.8825,0.8639,0.9015,110,37.13,1171598
+"resp_total","Respiratory","Knots p05/p25/p75/p95",0.9076,0.8949,0.9206,0.8943,0.8698,0.9195,120,36.93,1166339
+"resp_total","Respiratory","ns df=3 (no internal knots)",0.9108,0.899,0.9227,0.8826,0.864,0.9016,110,37.13,1171627
+"resp_total","Respiratory","ns df=5",0.9121,0.8999,0.9244,0.8855,0.8636,0.908,120,36.97,1167297
+"resp_total","Respiratory","2 lag knots",0.9101,0.8979,0.9225,0.8926,0.8714,0.9143,111,37.05,1169128
+"resp_total","Respiratory","4 lag knots",0.9105,0.8983,0.9229,0.8927,0.8715,0.9144,119,37.01,1168574
+"resp_total","Respiratory","Linear temperature",0.9401,0.9304,0.9499,0.9201,0.9073,0.933,100,37.93,1195575

@@ -2,7 +2,7 @@
 
 Replication code for:
 
-> Farquhar H. Ambient Temperature and Population-Level Medication Dispensing in Australia: A Distributed Lag Non-Linear Analysis with Equity Stratification. 2026.
+> Farquhar H. Ambient Temperature and Population-Level Medication Dispensing in Australia: A Distributed Lag Non-Linear Analysis with Equity Stratification. *Preprint (SSRN)*. https://doi.org/10.2139/ssrn.6411338. Manuscript under consideration at a peer-reviewed journal.
 
 ## Overview
 

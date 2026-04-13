@@ -22,6 +22,7 @@
 #   outputs/figures/bushfire_time_series.png
 #   outputs/figures/bushfire_did_forest.png
 #   outputs/figures/bushfire_parallel_trends.png
+#   outputs/tables/bushfire_parallel_trends_wald.csv
 #
 # Dependencies:
 #   install.packages(c("dplyr", "lubridate", "ggplot2", "patchwork",
@@ -533,6 +534,53 @@ if (length(int_terms) > 0) {
   ggsave(file.path(fig_dir, "bushfire_event_study.png"),
          p_es, width = 10, height = 6, dpi = 300)
   cat("  -> Saved: bushfire_event_study.png\n")
+
+  # --- Joint Wald test of pre-period coefficients (parallel trends) ---
+  # Under the parallel trends assumption, all pre-period interaction
+  # coefficients should be jointly zero. We use an F-test (not chi-square)
+  # because the quasi-Poisson dispersion parameter must be accounted for.
+
+  pre_terms <- es_results |>
+    filter(period < -1, term != "ref") |>
+    pull(term)
+
+  if (length(pre_terms) > 0) {
+    # Extract coefficient vector and variance-covariance submatrix
+    beta_pre <- coef(mod_es)[pre_terms]
+    vcov_pre <- vcov(mod_es)[pre_terms, pre_terms]
+    k <- length(pre_terms)
+    n_obs <- nrow(es_data)
+    n_params <- length(coef(mod_es))
+
+    # F-statistic: (beta' %*% V^{-1} %*% beta) / k
+    F_stat <- as.numeric(t(beta_pre) %*% solve(vcov_pre) %*% beta_pre) / k
+    df_resid <- n_obs - n_params
+    p_wald <- pf(F_stat, df1 = k, df2 = df_resid, lower.tail = FALSE)
+
+    cat("\n  Joint Wald test of pre-period parallel trends:\n")
+    cat("    Pre-period terms tested:", k, "\n")
+    cat("    F-statistic:", round(F_stat, 3), "\n")
+    cat("    df1 =", k, ", df2 =", df_resid, "\n")
+    cat("    p-value:", format.pval(p_wald, digits = 3), "\n")
+    cat("    Interpretation:",
+        ifelse(p_wald > 0.05,
+               "No evidence against parallel trends (fail to reject H0)\n",
+               "Evidence against parallel trends (reject H0)\n"))
+
+    # Save results
+    wald_result <- data.frame(
+      test = "Joint Wald F-test of pre-period interaction coefficients",
+      n_pre_terms = k,
+      F_stat = round(F_stat, 3),
+      df1 = k,
+      df2 = df_resid,
+      p_value = p_wald
+    )
+    write.csv(wald_result,
+              file.path(tab_dir, "bushfire_parallel_trends_wald.csv"),
+              row.names = FALSE)
+    cat("  -> Saved: bushfire_parallel_trends_wald.csv\n")
+  }
 }
 
 
@@ -559,6 +607,7 @@ smoke |>
 cat("\nOutputs:\n")
 cat("  outputs/tables/bushfire_did_results.csv\n")
 cat("  outputs/tables/bushfire_smoke_zones.csv\n")
+cat("  outputs/tables/bushfire_parallel_trends_wald.csv\n")
 cat("  outputs/figures/bushfire_parallel_trends.png\n")
 cat("  outputs/figures/bushfire_time_series.png\n")
 cat("  outputs/figures/bushfire_did_forest.png\n")
